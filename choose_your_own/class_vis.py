@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pylab as pl
+from time import time
 
 def prettyPicture(clf, X_test, y_test):
     x_min = 0.0; x_max = 1.0
@@ -12,8 +13,10 @@ def prettyPicture(clf, X_test, y_test):
     # point in the mesh [x_min, m_max]x[y_min, y_max].
     h = .01  # step size in the mesh
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    start_time = time()
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-
+    end_time = time()
+    print("Prediction took : {} sec".format(round(end_time-start_time,3)))
     # Put the result into a color plot
     Z = Z.reshape(xx.shape)
     plt.xlim(xx.min(), xx.max())
@@ -32,8 +35,7 @@ def prettyPicture(clf, X_test, y_test):
     plt.legend()
     plt.xlabel("bumpiness")
     plt.ylabel("grade")
-
-    plt.savefig("test.png")
+    plt.show()
 
 import base64
 import json
