@@ -28,7 +28,7 @@ plt.show()
 ################################################################################
 
 
-### your code here!  name your classifier object clf if you want the 
+### your code here!  name your classifier object clf if you want the
 ### visualization code (prettyPicture) to show you the decision boundary
 from sklearn import naive_bayes as nb
 from sklearn import svm
@@ -81,6 +81,54 @@ def DecisionTreeTest():
         prettyPicture(clf, features_test, labels_test)
     except NameError:
         pass
-NBTest()
+
+def kNNTest():
+    from sklearn import neighbors
+    # k-NN
+    print("\nk-NN Data :")
+    clf = neighbors.KNeighborsClassifier(n_jobs=-1,n_neighbors=20)
+    start_time = time()
+    clf.fit(features_train,labels_train)
+    end_time = time()
+    print("Training took  : {} sec".format(round(end_time-start_time,3)))
+    print("Accuracy : {}".format(clf.score(features_test,labels_test)))
+    try:
+        prettyPicture(clf, features_test, labels_test)
+    except NameError:
+        pass
+
+
+def AdaBoostTest():
+    from sklearn.ensemble import AdaBoostClassifier
+    # AdaBoost
+    print("\nAdaBoost Data :")
+    clf = AdaBoostClassifier()
+    start_time = time()
+    clf.fit(features_train,labels_train)
+    end_time = time()
+    print("Training took  : {} sec".format(round(end_time-start_time,3)))
+    print("Accuracy : {}".format(clf.score(features_test,labels_test)))
+    try:
+        prettyPicture(clf, features_test, labels_test)
+    except NameError:
+        pass
+
+def RandomForestTest():
+    from sklearn.ensemble import RandomForestClassifier
+    # Random Forest
+    print("\nRandomForest Data :")
+    clf = RandomForestClassifier()
+    start_time = time()
+    clf.fit(features_train,labels_train)
+    end_time = time()
+    print("Training took  : {} sec".format(round(end_time-start_time,3)))
+    print("Accuracy : {}".format(clf.score(features_test,labels_test)))
+    try:
+        prettyPicture(clf, features_test, labels_test)
+    except NameError:
+        pass
+
 SVCTest()
-DecisionTreeTest()
+kNNTest()
+AdaBoostTest()
+RandomForestTest()
